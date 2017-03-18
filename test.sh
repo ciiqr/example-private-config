@@ -42,3 +42,15 @@ for i in "${!things[@]}"; do
 		echo "$i: ${things[$i]}"
 	fi
 done
+
+if [[ "`array_get_first_set things 11 23 10 2`" != "Darkness" ]]; then
+	echo "array_get_first_set things 11 23 10 2: `array_get_first_set things 11 23 10 2`"
+fi
+
+if [[ "`array_get_first_set priv_conf this foo too`" != "' FOO '" ]]; then
+	echo "array_get_first_set priv_conf this foo too: `array_get_first_set priv_conf this foo too`"
+fi
+
+if [[ "`array_get_first_set priv_conf deluge_username common_username || echo bob`" != "bob" ]]; then
+	echo "array_get_first_set priv_conf deluge_username common_username || echo bob: `array_get_first_set priv_conf deluge_username common_username || echo bob`"
+fi

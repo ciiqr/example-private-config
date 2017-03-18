@@ -29,3 +29,20 @@ array_copy()
 	local serialized="`array_serialize "$1"`"
 	array_unserialize "$2" "$serialized"
 }
+array_get_first_set()
+{
+	# Get the array
+	declare -A arr
+	array_copy "$1" arr
+	shift
+
+	# Search for the keys
+	for k in "$@"; do
+		if [[ "${arr[$k]+isset}" == 'isset' ]]; then
+			echo "${arr[$k]}"
+			return 0
+		fi
+	done
+
+	return 1
+}
